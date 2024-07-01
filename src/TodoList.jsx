@@ -1,30 +1,28 @@
+import TodoListItem from './TodoListItem';
 
 const todoList = [
     {
         id: 1,
-        title: "Eat breakfast"
+        title: 'Eat breakfast'
     },
     {
         id: 2,
-        title: "Brush teeth"
+        title: 'Brush teeth'
     },
     {
         id: 3,
-        title: "Shower"
+        title: 'Shower'
     }
-]
+];
+
 const TodoList = () => {
     return (
         <ul>
-            {todoList.map((item) => {
-                return (
-                    <li key={item.id}>
-                        {item.title}
-                    </li>
-                )
-            })}
+            {todoList.map((item) => (
+                <TodoListItem key={item.id} todo={item} />
+            ))}
         </ul>
-    )
-}
+    );
+};
 
 export default TodoList;
