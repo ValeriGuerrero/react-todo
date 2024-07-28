@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 const AddTodoForm = ({ onAddTodo }) => {
     const [todoTitle, setTodoTitle] = useState('');
 
-
     const handleTitleChange = ({ target }) => {
         const newTodoTitle = target.value;
         setTodoTitle(newTodoTitle)
@@ -12,6 +11,7 @@ const AddTodoForm = ({ onAddTodo }) => {
     const handleAddTodo = (event) => {
         console.log(event);
         event.preventDefault();
+
         onAddTodo({
             title: todoTitle,
             id: Date.now()
@@ -24,6 +24,7 @@ const AddTodoForm = ({ onAddTodo }) => {
         <form onSubmit={handleAddTodo}>
             <label htmlFor="todoTitle">Title</label>
             <input text="title" id="todoTitle"
+
                 value={todoTitle}
                 onChange={handleTitleChange}
             />

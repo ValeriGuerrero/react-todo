@@ -3,6 +3,8 @@ import TodoListItem from './TodoListItem';
 
 
 const TodoList = ({ todoList }) => {
+    //const { todoList } = props;
+
     return (
         <ul>
             {todoList.map((item) => (
