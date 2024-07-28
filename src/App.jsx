@@ -4,6 +4,7 @@ import './App.css'
 import TodoList from './TodoList.jsx'
 import TodoListItem from './TodoListItem';
 
+
 const useSemiPersistentState = () => {
   let [todoList, setTodoList] = useState(JSON.parse(
     localStorage.getItem('savedTodoList')) || []);
@@ -21,6 +22,7 @@ const App = () => {
 
   let addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo]);
+
   };
 
   const removeTodo = (id) => {

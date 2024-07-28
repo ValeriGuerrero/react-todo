@@ -5,7 +5,6 @@ import TodoList from './TodoList.jsx'
 const AddTodoForm = ({ onAddTodo }) => {
     const [todoTitle, setTodoTitle] = useState('');
 
-
     const handleTitleChange = ({ target }) => {
         const newTodoTitle = target.value;
         setTodoTitle(newTodoTitle)
@@ -14,6 +13,7 @@ const AddTodoForm = ({ onAddTodo }) => {
     const handleAddTodo = (event) => {
         console.log(event);
         event.preventDefault();
+
         onAddTodo({
             title: todoTitle,
             id: Date.now()
@@ -24,6 +24,7 @@ const AddTodoForm = ({ onAddTodo }) => {
 
     return (
         <form onSubmit={handleAddTodo}>
+
             <>
                 <InputWithLabel
                     todoTitle={todoTitle}
@@ -32,6 +33,7 @@ const AddTodoForm = ({ onAddTodo }) => {
                     Title
                 </InputWithLabel>
             </>
+
             <button>Add</button>
         </form>
     )
