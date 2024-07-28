@@ -1,6 +1,6 @@
 import TodoListItem from './TodoListItem';
 
-const todoList = [
+/*const todoList = [
     {
         id: 1,
         title: 'Eat breakfast'
@@ -13,13 +13,14 @@ const todoList = [
         id: 3,
         title: 'Shower'
     }
-];
+];*/
 
-const TodoList = () => {
+const TodoList = ({ todoList }) => {
+    //const { todoList } = props;
     return (
         <ul>
             {todoList.map((item) => (
-                <TodoListItem key={item.id} todo={item} />
+                < TodoListItem key={item.id} todo={item} />
             ))}
         </ul>
     );
