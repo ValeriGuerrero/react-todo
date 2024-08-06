@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AddTodoForm from './AddTodoForm'
 import './App.css'
 import TodoList from './TodoList.jsx'
+import TodoListItem from './TodoListItem';
 
 
 const useSemiPersistentState = () => {
@@ -24,6 +25,11 @@ const App = () => {
 
   };
 
+  const removeTodo = (id) => {
+    const newTodoList = todoList.filter((todo) => todo.id !== id)
+    setTodoList(newTodoList)
+  }
+
   return (
     <>
       <div>
@@ -31,7 +37,7 @@ const App = () => {
 
         <AddTodoForm onAddTodo={addTodo} />
 
-        <TodoList todoList={todoList} />
+        <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
 
       </div>
     </>
