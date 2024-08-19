@@ -5,7 +5,6 @@ import TodoList from './TodoList.jsx'
 import TodoListItem from './TodoListItem';
 
 
-
 const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
