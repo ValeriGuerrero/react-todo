@@ -4,8 +4,6 @@ import './App.css'
 import TodoList from './TodoList.jsx'
 import TodoListItem from './TodoListItem';
 
-
-
 const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -48,11 +46,10 @@ const App = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem('savedTodoList', JSON.stringify(todoList));
-    }
-  }, [todoList, isLoading]);
+
+const App = () => {
+
+  const [todoList, setTodoList] = useSemiPersistentState();
 
   let addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo]);
@@ -71,7 +68,7 @@ const App = () => {
 
         <AddTodoForm onAddTodo={addTodo} />
 
-        {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList} onRemoveTodo={removeTodo} />}
+        <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
 
       </div>
     </>
