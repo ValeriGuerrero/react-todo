@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import InputWithLabel from './InputWithLabel'
 import TodoList from './TodoList.jsx'
+import { RatingReview } from './star';
 
 const AddTodoForm = ({ onAddTodo }) => {
     const [todoTitle, setTodoTitle] = useState('');
+    const [rating, setRating] = useState(0);
 
     const handleTitleChange = ({ target }) => {
         const newTodoTitle = target.value;
@@ -14,21 +16,25 @@ const AddTodoForm = ({ onAddTodo }) => {
         event.preventDefault();
         onAddTodo(todoTitle);
         setTodoTitle(''); //resets 
+        setRating(0);
     };
 
+
     return (
-        <form onSubmit={handleAddTodo}>
+        <form onSubmit={handleAddTodo} className='todoForm"' >
 
             <>
                 <InputWithLabel
                     todoTitle={todoTitle}
+                    className='title'
                     handleTitleChange={handleTitleChange}
                 >
-                    Title
+                    Book Title
                 </InputWithLabel>
+                <RatingReview rating={rating} setRating={setRating} /> {/* Rating input */}
             </>
 
-            <button>Add</button>
+            <button className='addButton'>Add</button>
         </form>
     )
 };
