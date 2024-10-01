@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import InputWithLabel from './InputWithLabel'
 import TodoList from './TodoList.jsx'
-import { RatingReview } from './star';
+import { RatingReview } from '../star.jsx';
+import PropTypes from 'prop-types'; // ES6
 
 const AddTodoForm = ({ onAddTodo }) => {
+
     const [todoTitle, setTodoTitle] = useState('');
     const [rating, setRating] = useState(0);
 
@@ -25,17 +27,23 @@ const AddTodoForm = ({ onAddTodo }) => {
 
             <>
                 <InputWithLabel
+                    className='bookTitle'
                     todoTitle={todoTitle}
-                    className='title'
+
                     handleTitleChange={handleTitleChange}
                 >
                     Book Title
                 </InputWithLabel>
-                <RatingReview rating={rating} setRating={setRating} /> {/* Rating input */}
+
             </>
 
             <button className='addButton'>Add</button>
         </form>
     )
 };
+
+AddTodoForm.propTypes = {
+    onAddTodo: PropTypes.func.isRequired,
+};
+
 export default AddTodoForm; 
