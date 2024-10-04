@@ -1,6 +1,6 @@
 body{
   background-color: rgb(117, 187, 190);
-  color: whitesmoke;
+  color: white;
   font-family: fantasy;
   padding: 0;
   margin: 0;
@@ -46,6 +46,47 @@ body{
   }
 }
 
+.react-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.react-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 60px;
+  height: 30px;
+  background: rgb(247, 186, 186);
+  border-radius: 100px;
+  position: relative;
+  transition: background-color .2s;
+}
+
+.react-switch-label .react-switch-button {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 25px;
+  height: 25px;
+  border-radius: 45px;
+  transition: 0.2s;
+  background: #fff;
+  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+}
+
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.react-switch-label:active .react-switch-button {
+  width: 40px;
+}
+
 .card {
   padding: 2em;
 }
@@ -60,6 +101,7 @@ body{
 }
 
 /* Styles for small screens */
+
 @media (max-width: 480px) {
   .navbar {
     display: flex;
@@ -112,14 +154,66 @@ body{
   }
   
   .bookTitle{
-    margin-right:100px;
-    font-size: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    font-size: 1.4rem;
+  }
+
+.switch-toggle-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+  
+  .react-switch-checkbox {
+    height: 0;
+    width: 0;
+    visibility: hidden;
   }
   
+  .react-switch-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 32px;
+    height: 17px;
+    background: rgb(247, 186, 186);
+    border-radius: 80px;
+    position: relative;
+    transition: background-color .2s;
+  }
+  
+  .react-switch-label .react-switch-button {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 13px;
+    height: 13px;
+    border-radius: 45px;
+    transition: 0.2s;
+    background: #fff;
+    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+  }
+  
+  .react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+  }
+  
+  .react-switch-label:active .react-switch-button {
+    width: 20px;
+  }
+
   .removeButton{
     background-color: rgb(221, 241, 221);
     color: #000;
-    height: 20px;
+    width: 75px;
+    height: 25px;
     font-size: 15px;
     align-items: baseline;
     padding: 2px;
@@ -130,13 +224,20 @@ body{
   .addButton{
     background-color: rgb(221, 241, 221);
     color: #000;
-    height: 25px;
+    width: 60px;
+    height: 28px;
     font-weight: bold;
     font-size: 15px;
     align-items: baseline;
     padding: 5px;
     margin: 5px;
   }
+
+  .starRating{
+    cursor: pointer;
+    font-size: 20px;
+  }
+
 }
 
 
