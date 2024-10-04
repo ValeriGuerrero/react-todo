@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AddTodoForm from './AddTodoForm'
+import AddTodoForm from './components/AddTodoForm'
 import './App.css'
-import TodoList from './TodoList.jsx';
-import TodoListItem from './TodoListItem';
+import TodoList from './components/TodoList.jsx';
+import TodoListItem from './components/TodoListItem';
 import BooksLogo from './images/Books.png';
 
 
@@ -86,6 +86,13 @@ const App = () => {
       }
       const data = await response.json();
       console.log("Rating updated:", data);
+
+      setTodoList((prevTodoList) =>
+        prevTodoList.map((todo) =>
+          todo.id === id ? { ...todo, rating: newRating } : todo
+        )
+      )
+
     } catch (error) {
       console.log("Error", error);
     }
@@ -161,9 +168,11 @@ const App = () => {
               <h1>To do list</h1>
 
               <AddTodoForm onAddTodo={addTodo} />
+              <>
+                {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList}
 
-              {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList}
-                onRemoveTodo={removeTodo} updateRating={updateRating} />}
+                  updateRating={updateRating} onRemoveTodo={removeTodo} />}
+              </>
 
             </div>
           </>
