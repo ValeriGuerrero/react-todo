@@ -5,11 +5,31 @@ import './App.css'
 import TodoList from './components/TodoList.jsx';
 import TodoListItem from './components/TodoListItem';
 import BooksLogo from './images/Books.png';
+import Switch from './switch';
 
+function sortTodosAscending(objectA, objectB) {
+  if (objectA < objectB) {
+    return -1;
+  } else if (objectA > objectB) {
+    return 1;
+  } else {
+    return 0;
+  }
+};
 
+function sortTodosDescending(objectA, objectB) {
+  if (objectA < objectB) {
+    return 1;
+  } else if (objectA > objectB) {
+    return -1;
+  } else {
+    return 0;
+  }
+};
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
+  const [sortAsc, setSortAsc] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -106,7 +126,7 @@ const App = () => {
       }
     }
     const url =
-      `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`
+      `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}?view=Grid%20view&sort[0][field]=title&sort[0][direction]=asc`
     console.log('url', url);
     try {
       const response = await fetch(url, options)
@@ -114,18 +134,21 @@ const App = () => {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json()
-      console.log(data)
+      console.log("Data:", data)
+
 
       const todos = data.records.map((todo) => {
         return {
           id: todo.id,
-          title: todo.fields.title,
+          title: todo.fields.title || 'Untitled',
           rating: todo.fields.rating || 0,
         }
       })
-      console.log(todos)
 
-      setTodoList(todos)
+      const sortedTodos = sortTodos(todos)
+
+
+      setTodoList(sortedTodos)
       setIsLoading(false)
     } catch (error) {
       console.log("Error", error)
@@ -139,6 +162,25 @@ const App = () => {
     fetchData();
   }, []);
 
+  function sortTodos(todos) {
+    return todos.sort((objectA, objectB) => {
+      if (sortAsc) {
+        return sortTodosAscending(objectA.title, objectB.title)
+      } else {
+        return sortTodosDescending(objectA.title, objectB.title)
+      }
+    });
+  }
+
+  function handleSortToggleClick() {
+    setTodoList((prevTodos) => sortTodos(prevTodos))
+    setSortAsc(!sortAsc)
+
+
+    //setSortAsc((prevSortAsc) => !prevSortAsc); // Toggle sorting order
+    //setTodoList((prevTodos) => sortTodos([...prevTodos]));
+  }
+
   const addTodo = (newTodoTitle) => {
     // setTodoList([...todoList, newTodo]);
     postData(newTodoTitle)
@@ -148,6 +190,7 @@ const App = () => {
     const newTodoList = todoList.filter((todo) => todo.id !== id)
     setTodoList(newTodoList)
   }
+
 
   return (
     <BrowserRouter>
@@ -166,8 +209,11 @@ const App = () => {
           <>
             <div>
               <h1>To do list</h1>
-
               <AddTodoForm onAddTodo={addTodo} />
+              <div className='switch-toggle-button'>
+                <Switch sortAsc={sortAsc} handleSortToggleClick={handleSortToggleClick} />
+              </div>
+              {"sortAscendant: " + sortAsc}
               <>
                 {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList}
 
