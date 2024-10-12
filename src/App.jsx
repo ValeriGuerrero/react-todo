@@ -1,37 +1,44 @@
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from 'react'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import AddTodoForm from './components/AddTodoForm'
 import './App.css'
 import TodoList from './components/TodoList.jsx';
 import TodoListItem from './components/TodoListItem';
 import BooksLogo from './images/Books.png';
 import Switch from './switch';
+import { About } from './About';
 
 function sortTodosAscending(objectA, objectB) {
-  if (objectA < objectB) {
+  const titleA = objectA.toLowerCase();
+  const titleB = objectB.toLowerCase();
+
+  if (titleA < titleB) {
     return -1;
-  } else if (objectA > objectB) {
+  } else if (titleA > titleB) {
     return 1;
   } else {
     return 0;
   }
-};
+}
 
 function sortTodosDescending(objectA, objectB) {
-  if (objectA < objectB) {
+  const titleA = objectA.toLowerCase();
+  const titleB = objectB.toLowerCase();
+
+  if (titleA < titleB) {
     return 1;
-  } else if (objectA > objectB) {
+  } else if (titleA > titleB) {
     return -1;
   } else {
     return 0;
   }
-};
+}
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [sortAsc, setSortAsc] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-
+  const footerRef = useRef(null);
 
   /*console.log(import.meta.env)*/
 
@@ -145,7 +152,7 @@ const App = () => {
         }
       })
 
-      const sortedTodos = sortTodos(todos)
+      const sortedTodos = sortTodos(todos, sortAsc)
 
 
       setTodoList(sortedTodos)
@@ -162,7 +169,8 @@ const App = () => {
     fetchData();
   }, []);
 
-  function sortTodos(todos) {
+
+  function sortTodos(todos, sortAsc) {
     return todos.sort((objectA, objectB) => {
       if (sortAsc) {
         return sortTodosAscending(objectA.title, objectB.title)
@@ -172,13 +180,13 @@ const App = () => {
     });
   }
 
+
   function handleSortToggleClick() {
-    setTodoList((prevTodos) => sortTodos(prevTodos))
-    setSortAsc(!sortAsc)
-
-
-    //setSortAsc((prevSortAsc) => !prevSortAsc); // Toggle sorting order
-    //setTodoList((prevTodos) => sortTodos([...prevTodos]));
+    setSortAsc((prevSortAsc) => {
+      const newSortAsc = !prevSortAsc;
+      setTodoList((prevTodos) => sortTodos(prevTodos, newSortAsc));
+      return newSortAsc;
+    });
   }
 
   const addTodo = (newTodoTitle) => {
@@ -191,44 +199,59 @@ const App = () => {
     setTodoList(newTodoList)
   }
 
+  const scrollToFooter = (e) => {
+    e.preventDefault(); // Prevent default anchor behavior
+    if (footerRef.current) {
+      footerRef.current.scrollIntoView({ behavior: 'smooth' }); // Scroll to the footer
+    }
+  };
 
   return (
     <BrowserRouter>
       <nav className='navbar'>
         <img className='logo' src={BooksLogo} alt="Books Logo" />
         <ul className='navList'>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li><a className='booksLink' href='https://openlibrary.org/' target='_blank' rel="noopener noreferrer">More Books
+          <li><Link to="/" className='nav-home'>Home</Link></li>
+          <li><Link to="/about" className='nav-about'>About</Link></li>
+          <li><a className='nav-contact' onClick={scrollToFooter}>Contact</a></li>
+          <li><a className='booksLink' href='https://libbyapp.com/library/hcpl/spotlight-new/page-1' target='_blank' rel="noopener noreferrer">More Books
           </a></li>
         </ul>
       </nav>
+
       <Routes>
         <Route path='/' element={
-          <>
-            <div>
-              <h1>To do list</h1>
-              <AddTodoForm onAddTodo={addTodo} />
-              <div className='switch-toggle-button'>
-                <Switch sortAsc={sortAsc} handleSortToggleClick={handleSortToggleClick} />
-              </div>
-              {"sortAscendant: " + sortAsc}
-              <>
-                {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList}
 
-                  updateRating={updateRating} onRemoveTodo={removeTodo} />}
-              </>
-
+          <div>
+            <h1 className='todo-title'>To do list</h1>
+            <AddTodoForm onAddTodo={addTodo} />
+            <div className='switch-toggle-button'>
+              <Switch sortAsc={sortAsc} handleSortToggleClick={handleSortToggleClick} />
             </div>
-          </>
+
+            {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList}
+
+              updateRating={updateRating} onRemoveTodo={removeTodo} />}
+
+          </div>
         } >
         </Route>
-        <Route path='/new' element={
-          <h1>New Todo List </h1>
+        <Route path='/about' element={
+          <div>
+            <About />
+          </div>
         }>
         </Route>
       </Routes>
+
+      <footer className='footer' ref={footerRef}>
+        <span>&copy; 2024 Book Tracker App. All rights reserved. VG</span>
+        <h4>Contact Us</h4>
+        <p>books@gmail.com</p>
+        <p>800-888-8080</p>
+
+      </footer>
+
     </BrowserRouter >
   )
 }

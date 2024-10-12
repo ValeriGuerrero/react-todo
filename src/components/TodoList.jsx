@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const TodoList = ({ todoList, updateRating, onRemoveTodo }) => {
 
     return (
-        <ul className='form-items'>
+        <ul className='form-todo-list'>
             {todoList.map((item) => (
                 < TodoListItem key={item.id} todo={item} updateRating={updateRating} onRemoveTodo={onRemoveTodo} />
             ))}

@@ -5,11 +5,11 @@ import './App.jsx'
 
 const Switch = ({ sortAsc, handleSortToggleClick }) => {
     return (
-        <>
+        <div>
 
             <input
                 className="react-switch-checkbox"
-                id={`react-switch-new`}
+                id="react-switch-new"
                 type="checkbox"
                 checked={sortAsc}
                 onChange={handleSortToggleClick}
@@ -17,12 +17,14 @@ const Switch = ({ sortAsc, handleSortToggleClick }) => {
             <label
                 style={{ background: sortAsc && '#a0624e' }}
                 className="react-switch-label"
-                htmlFor={`react-switch-new`}
+                htmlFor="react-switch-new"
             >
 
-                <span className={`react-switch-button`} />
+                <span className="react-switch-button" />
+
             </label>
-        </>
+            <p className='sort-titles'> Sort title in ascendant or descendant order</p>
+        </div>
     );
 };
 
