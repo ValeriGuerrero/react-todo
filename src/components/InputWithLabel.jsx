@@ -10,7 +10,7 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children, }) => {
     })
 
     return (
-        <>
+        <div>
             <label htmlFor="todoTitle">{children}</label>
             <input
                 type="text"
@@ -19,7 +19,7 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children, }) => {
                 onChange={handleTitleChange}
                 ref={inputRef}
             />
-        </>)
+        </div>)
 }
 
 InputWithLabel.proptTypes = {

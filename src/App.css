@@ -1,27 +1,34 @@
+
 body{
   background-color: rgb(117, 187, 190);
   color: white;
   font-family: fantasy;
   padding: 0;
   margin: 0;
+  width: 100%;  
+  display: flex;
+  flex-direction: column;
 }
 
-.booksLink{
+.nav-home, .nav-about, .nav-contact, .booksLink {
   color: inherit;
   text-decoration: none;
 }
 
-.booksLink:hover {
+nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover, a.nav-contact:hover {
   color:rgb(171, 123, 123); 
-  transform: scale(3.1);
-  transition: all 0.6s ease-in-out;
+  font-size: 1.5rem;
+  transform: scale(1.1);
+  transition: all 0.5s ease-in-out;
+  box-shadow: #787ef8aa 0 0 2em;
 }
 
 #root {
-  /*max-width: 1280px; */
-  margin: 0 auto;
-  /*padding: 2rem;*/
+  /*max-width: 1280px; 
+  margin: 0 ;
+  padding: 2rem;*/
   text-align: center;
+  width: 100%;
 }
 
 .logo:hover {
@@ -29,6 +36,13 @@ body{
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.switch-toggle-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
 }
 
 @keyframes logo-spin {
@@ -87,10 +101,6 @@ body{
   width: 40px;
 }
 
-.card {
-  padding: 2em;
-}
-
 .read-the-docs {
   color: #888;
 }
@@ -105,20 +115,21 @@ body{
 @media (max-width: 480px) {
   .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font-size: 1.3rem;
     font-weight: 100px;
     color: honeydew;
   }
 
-  nav ul li a.booksLink:hover {
+  nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover {
     color:rgb(171, 123, 123); 
-    font-size: 1rem;
+    font-size: 1.5rem;
     transform: scale(1.1);
     transition: all 0.5s ease-in-out;
     box-shadow: #787ef8aa 0 0 2em;
   }
+  
 
   .logo.react:hover {
     filter: drop-shadow(0 0 2em #61dafbaa);
@@ -126,7 +137,7 @@ body{
 
   .logo {
     height: 2.5em;
-    padding: 1.5em;
+    padding: 1em;
   }
   
   .navList {
@@ -139,7 +150,7 @@ body{
   }
   
   .navList li {
-    margin-right: 10px; /* Add space between each nav item */
+    margin: 4px; 
   }
   
   .todoForm{
@@ -148,25 +159,25 @@ body{
     flex-direction: row;
     gap: 10px;
     width: 100%;
-    margin-bottom: 200px;
-    padding: 2em;
+    padding: 2em 2em 4rem 4rem;
+    margin: 3rem;
+    margin: 0;
     align-items: center;
+  }
+
+  .form-todo-list{
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 2rem 2rem 2rem  ;
+    margin: 4rem;
   }
   
   .bookTitle{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    
     font-size: 1.4rem;
   }
-
-.switch-toggle-button{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
-}
   
   .react-switch-checkbox {
     height: 0;
@@ -238,18 +249,71 @@ body{
     font-size: 20px;
   }
 
+  .about-page{
+    font-size: 1.3em;
+    padding: 0 5rem 7rem;
+  }
+  
+  .key-title{
+    color:darkslategrey;
+  }
+  
+  .key-list{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+  
+  main {
+    flex: 1; 
+  }
+  
+  footer {
+    width: 100%;
+    height: auto;
+    position: relative;
+    list-style: none;
+    text-decoration: none;
+    background-color: #f8f8f8;
+    bottom: 0;
+    color: cadetblue;
+    font-size: 1.3rem;
+    box-sizing: border-box; 
+  }
+  
+  .footer p, 
+  .footer h4 {
+    margin: 8px;               
+    padding: 0;              
+    line-height: 1.4;        
+    font-size: .8rem;
+  }
+
 }
 
 
   /* Styles for tablets */
 @media (min-width: 481px) and (max-width: 768px){
+  .todo-title{
+    font-size: 4.7rem;
+  }
+
   .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     font-weight: 200;
     color: honeydew;
+  }
+
+  nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover {
+    color:rgb(171, 123, 123); 
+    font-size: 1.7rem;
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+    box-shadow: #787ef8aa 0 0 2em;
   }
 
   .booksLink:hover {
@@ -262,8 +326,7 @@ body{
 
   .logo {
     height: 3em;
-    padding: 1em;
-
+    padding: 40px;
   }
   
   .navList {
@@ -276,31 +339,75 @@ body{
   }
   
   .navList li {
-    margin-right: 20px; /* Add space between each nav item */
+    padding: 8px; /* Add space between each nav item */
   }
-  /*
+  .react-switch-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    width: 46px;
+    height: 25px;
+    background: rgb(247, 186, 186);
+    border-radius: 80px;
+    position: relative;
+    transition: background-color .2s;
+  }
+  
+  .react-switch-label .react-switch-button {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 45px;
+    transition: 0.2s;
+    background: #fff;
+    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+  }
+  
+  .react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+  }
+  
+  .react-switch-label:active .react-switch-button {
+    width: 20px;
+  }
+  
   .todoForm{
     display: flex;
     gap: 10px;
-    margin-bottom: 4px;
+    padding: 4em;
     align-items: center;
     font-size: 2rem;
   }
-*/
 
 .bookTitle{
-  margin-right:100px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-size: 2.2rem;
 }
-.form-items{
-  font-size: 1.1rem;
+
+
+.form-todo-list{
+  font-size: 2.6rem;
   display: flex; 
   flex-direction: column;
   align-items:flex-start;
   padding: 1em;
   margin-left: 5rem;
-
 }
   
+.sort-titles {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
   .removeButton{
     background-color: rgb(221, 241, 221);
     color: #000;
@@ -322,11 +429,60 @@ body{
     padding: 5px;
     margin: 5px;
   }
+
+  input#todoTitle {
+    align-items: center;
+    width: 200px; 
+}
+
+.about-page{
+  font-size: 1.5em;
+  padding: 0 1rem 4rem 0;
+}
+
+.key-title{
+  color:darkslategrey;
+}
+
+.key-list{
+  display: flex;
+  flex-direction: column;
+  padding: 0 7.5rem;
+  margin: 2rem;
+}
+main {
+  flex: 1; 
+}
+footer {
+  width: 100%;
+  height: auto;
+  position: relative;
+  list-style: none;
+  text-decoration: none;
+  background-color: #f8f8f8;
+  bottom: 0;
+  color: cadetblue;
+  font-size: 1.4rem;
+  box-sizing: border-box; 
+}
+
+.footer p, 
+.footer h4 {
+  margin: 0;               
+  padding: 0;              
+  line-height: 1.4;        
+  font-size: 1.4rem;
+}
+
 }
 
 
 /* Styles for larger tablets or smaller laptops */
 @media (min-width: 769px) and (max-width: 1024px){
+  .todo-title{
+    font-size: 5.7rem;
+  }
+
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -334,6 +490,14 @@ body{
     font-size: 2rem;
     font-weight: 200;
     color: honeydew;
+  }
+
+  nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover {
+    color:rgb(171, 123, 123); 
+    font-size: 2.5rem;
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+    box-shadow: #787ef8aa 0 0 2em;
   }
 
   .booksLink:hover {
@@ -363,11 +527,25 @@ body{
     margin-right: 20px; /* Add space between each nav item */
   }
 
-.bookTitle{
-  margin-right:100px;
-  font-size: 5rem;
-}
-.form-items{
+  .bookTitle{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 2.2rem;
+  }
+
+  .todoForm{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 200px;
+    padding: 2em;
+    align-items: center;
+  }
+
+.form-todo-list{
   font-size: 2rem;
   display: flex; 
   flex-direction: column;
@@ -402,19 +580,30 @@ body{
 
 /* Styles for small desktops *********Still working on it***********/
 @media (min-width: 1025px) and (max-width: 1200px){
+  .todo-title{
+    font-size: 4.5rem;
+  }
   .navbar {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: 200;
     color: honeydew;
     padding: 1em;
   }
 
+  nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover {
+    color:rgb(171, 123, 123); 
+    font-size: 3rem;
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+    box-shadow: #787ef8aa 0 0 2em;
+  }
+
   .logo {
-    height: 3em;
-    padding: 1.5em;
+    height: 4em;
+    padding: 2em;
 
   }
   
@@ -430,24 +619,38 @@ body{
   .navList li {
     margin-right: 20px; /* Add space between each nav item */
   }
+
+  .bookTitle{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 2.7rem;
+  }
   
   .todoForm{
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
     align-items: center;
-    font-size: 2rem;
+    font-size: 7rem;
   }
   
   .title{
     margin-right:100px;
   }
+
+  .sort-titles {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   
   .removeButton{
     background-color: rgb(221, 241, 221);
     color: #000;
-    height: 25px;
-    font-size: 18px;
+    height: 40px;
+    font-size: 25px;
     align-items: baseline;
     padding: 5px;
     margin: 5px;
@@ -456,9 +659,9 @@ body{
   .addButton{
     background-color: rgb(221, 241, 221);
     color: #000;
-    height: 25px;
+    height: 40px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 25px;
     align-items: baseline;
     padding: 5px;
     margin: 5px;
@@ -469,19 +672,27 @@ body{
   /* Styles for large screens *******Still working on it*********/
 
 @media (min-width: 1201px) {
+  .todo-title{
+    font-size: 5.7rem;
+  }
   .navbar {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: 200;
     color: honeydew;
-    padding: 1em;
+    padding: 0 2.8em;
+  }
+
+  nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover, a.nav-contact:hover {
+    font-size: 3rem;
+
   }
 
   .logo {
-    height: 3em;
-    padding: 1.5em;
+    height: 4em;
+    padding: 1.4em;
 
   }
   
@@ -497,24 +708,46 @@ body{
   .navList li {
     margin-right: 20px; /* Add space between each nav item */
   }
+
+  .bookTitle{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 2.9rem;
+  }
   
   .todoForm{
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    /*gap: 10px 20px;
+    margin-bottom: 20px;*/
     align-items: center;
-    font-size: 2rem;
+    font-size: 7rem;
+  }
+
+  .form-todo-list{
+    display: flex;
+    flex-direction: column;
+    font-size: 2.5rem;
+    padding: 0rem 4rem 4rem 16rem  ;
+    margin: 4rem;
   }
   
   .title{
     margin-right:100px;
   }
+
+  .sort-titles {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
   
   .removeButton{
     background-color: rgb(221, 241, 221);
     color: #000;
-    height: 25px;
-    font-size: 18px;
+    height: 40px;
+    font-size: 25px;
     align-items: baseline;
     padding: 5px;
     margin: 5px;
@@ -523,11 +756,57 @@ body{
   .addButton{
     background-color: rgb(221, 241, 221);
     color: #000;
-    height: 25px;
+    height: 40px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 25px;
     align-items: baseline;
     padding: 5px;
     margin: 5px;
   }
+
+  input#todoTitle {
+    display: flex;
+    justify-items: center;
+    width: 350px; 
+}
+
+.about-page{
+  font-size: 1.8em;
+  padding: 0 5rem 5rem;
+}
+
+.key-title{
+  color:darkslategrey;
+}
+
+.key-list{
+  display: flex;
+  flex-direction: column;
+  padding: 0 7.5rem;
+  margin: 4rem;
+}
+main {
+  flex: 1; 
+}
+footer {
+  width: 100%;
+  height: auto;
+  position: relative;
+  list-style: none;
+  text-decoration: none;
+  background-color: #f8f8f8;
+  bottom: 0;
+  color: cadetblue;
+  font-size: 1.4rem;
+  box-sizing: border-box; 
+}
+
+.footer p, 
+.footer h4 {
+  margin: 0;               
+  padding: 0;              
+  line-height: 1.4;        
+  font-size: 1.4rem;
+}
+
 }

@@ -25,8 +25,6 @@ const TodoListItem = ({ todo, onRemoveTodo, updateRating }) => {
     )
 }
 
-
-
 TodoListItem.propTypes = {
     todo: PropTypes.shape({
         id: PropTypes.string.isRequired,
