@@ -6,7 +6,12 @@ const TodoList = ({ todoList, updateRating, onRemoveTodo }) => {
     return (
         <ul className='form-todo-list'>
             {todoList.map((item) => (
-                < TodoListItem key={item.id} todo={item} updateRating={updateRating} onRemoveTodo={onRemoveTodo} />
+                < TodoListItem
+                    key={item.id}
+                    todo={item}
+                    updateRating={updateRating}
+                    onRemoveTodo={onRemoveTodo}
+                />
             ))}
 
         </ul>
@@ -17,7 +22,7 @@ TodoList.propTypes = {
     todoList: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,
-            title: PropTypes.string,
+            title: PropTypes.string.isRequired,
             rating: PropTypes.number
         })
     ).isRequired,

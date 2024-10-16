@@ -7,7 +7,7 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children, }) => {
     const inputRef = useRef();
     useEffect(() => {
         inputRef.current.focus();
-    })
+    }, [])
 
     return (
         <div>
@@ -22,7 +22,7 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children, }) => {
         </div>)
 }
 
-InputWithLabel.proptTypes = {
+InputWithLabel.propTypes = {
     todoTitle: PropTypes.string.isRequired,
     handleTitleChange: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,

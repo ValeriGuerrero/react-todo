@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import AddTodoForm from './components/AddTodoForm'
 import './App.css'
 import TodoList from './components/TodoList.jsx';
-import TodoListItem from './components/TodoListItem';
 import BooksLogo from './images/Books.png';
 import Switch from './switch';
 import { About } from './About';
+import { useCallback } from 'react';
 
 function sortTodosAscending(objectA, objectB) {
   const titleA = objectA.toLowerCase();
@@ -40,7 +40,6 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const footerRef = useRef(null);
 
-  /*console.log(import.meta.env)*/
 
   const postData = async (newTodoTitle, newTodoRating = 0) => {
     const options = {
@@ -125,7 +124,31 @@ const App = () => {
     }
   };
 
-  const fetchData = async () => {
+  const onRemoveTodo = async (id) => {
+    const newTodoList = todoList.filter((todo) => todo.id !== id);
+    setTodoList(newTodoList);
+
+    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}/${id}`;
+
+    const options = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      console.log(`Todo with ID ${id} has been deleted from Airtable.`);
+    } catch (error) {
+      console.log("Error deleting todo:", error);
+    }
+  };
+
+  const fetchData = useCallback(async () => {
     const options = {
       method: 'GET',
       headers: {
@@ -153,21 +176,19 @@ const App = () => {
       })
 
       const sortedTodos = sortTodos(todos, sortAsc)
-
-
       setTodoList(sortedTodos)
-      setIsLoading(false)
+      setIsLoading(false);
     } catch (error) {
       console.log("Error", error)
       if (error.message === 'Failed to fetch') {
         alert('Network error. Please check your connection and try again.');
       }
     }
-  }
+  }, [sortAsc])
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData])
 
 
   function sortTodos(todos, sortAsc) {
@@ -179,6 +200,8 @@ const App = () => {
       }
     });
   }
+
+
 
 
   function handleSortToggleClick() {
@@ -223,7 +246,7 @@ const App = () => {
         <Route path='/' element={
 
           <div>
-            <h1 className='todo-title'>To do list</h1>
+            <h1 className='todo-title'>To do list from: {import.meta.env.VITE_TABLE_NAME}</h1>
             <AddTodoForm onAddTodo={addTodo} />
             <div className='switch-toggle-button'>
               <Switch sortAsc={sortAsc} handleSortToggleClick={handleSortToggleClick} />
@@ -231,7 +254,7 @@ const App = () => {
 
             {isLoading ? <p>Loading...</p> : <TodoList todoList={todoList}
 
-              updateRating={updateRating} onRemoveTodo={removeTodo} />}
+              updateRating={updateRating} onRemoveTodo={onRemoveTodo} />}
 
           </div>
         } >
