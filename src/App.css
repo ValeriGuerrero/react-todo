@@ -4,8 +4,9 @@ body{
   color: whitesmoke;
   font-family: fantasy;
   padding: 0;
-  margin: 0;
-  width: 100%;  
+  margin: 0;/*
+  width: 100vw;  
+  height: 100vh;*/
   display: flex;
   flex-direction: column;
 }
@@ -124,17 +125,17 @@ nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover, a.nav-contact:
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 100px;
     color: honeydew;
   }
 
-  nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover {
+  nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover, a.nav-contact:hover {
     color:rgb(171, 123, 123); 
-    font-size: 1.5rem;
     transform: scale(1.1);
     transition: all 0.5s ease-in-out;
     box-shadow: #787ef8aa 0 0 2em;
+    cursor: pointer;
   }
   
 
@@ -157,7 +158,7 @@ nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover, a.nav-contact:
   }
   
   .navList li {
-    margin: 4px; 
+    margin: 3px; 
   }
   
   .todoForm{
@@ -317,6 +318,7 @@ nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover, a.nav-contact:
     transform: scale(1.1);
     transition: all 0.5s ease-in-out;
     box-shadow: #787ef8aa 0 0 2em;
+    cursor: pointer;
   }
 
   .booksLink:hover {
@@ -498,6 +500,7 @@ footer {
     transform: scale(1.1);
     transition: all 0.5s ease-in-out;
     box-shadow: #787ef8aa 0 0 2em;
+    cursor: pointer;
   }
 
   .booksLink:hover {
@@ -646,6 +649,7 @@ footer {
     transform: scale(1.1);
     transition: all 0.5s ease-in-out;
     box-shadow: #787ef8aa 0 0 2em;
+    cursor: pointer;
   }
 
   .booksLink:hover {
@@ -790,7 +794,7 @@ footer {
 
   nav ul li a.booksLink:hover, a.nav-home:hover, a.nav-about:hover, a.nav-contact:hover {
     font-size: 3rem;
-
+    cursor: pointer;
   }
 
   .logo {

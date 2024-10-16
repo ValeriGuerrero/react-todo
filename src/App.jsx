@@ -217,7 +217,7 @@ const App = () => {
     postData(newTodoTitle)
   }
 
-  const removeTodo = (id) => {
+  const onremoveTodo = (id) => {
     const newTodoList = todoList.filter((todo) => todo.id !== id)
     setTodoList(newTodoList)
   }
