@@ -34,7 +34,7 @@ const AddTodoForm = ({ onAddTodo }) => {
                 </InputWithLabel>
             </div>
 
-            <button className='addButton'>Add</button>
+            <button type="submit" className='addButton'>Add</button>
         </form>
     )
 };
